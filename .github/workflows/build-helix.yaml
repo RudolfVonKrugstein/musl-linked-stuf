@@ -1,9 +1,8 @@
 name: Rust-static-build
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    tags: ['*']
+    branches: [ '*' ]
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -41,7 +40,6 @@ jobs:
 
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
             $HOME/.cargo/bin/hx
