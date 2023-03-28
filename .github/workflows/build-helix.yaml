@@ -19,11 +19,22 @@ jobs:
         with:
           owner: 'helix-editor'
           repository: 'helix'
-      - name: Compile and release
-        uses: rust-build/rust-build.action@v1.4.3
+
+      - name: Install latest rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          default: true
+          override: true
+
+      - name: Build
+        run: cd helix && cargo build --target=x86_64-unknown-linux-musl --all --release && strip target/release/PROJECT_NAME && mv target/release/$PROJECT_NAME target/release/PROJECT_NAME_amd64
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            helix/target/x86_64-unknown-linux-musl/release/hx
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          SRC_DIR: helix/helix-term        
-          RUSTTARGET: ${{ matrix.target }}
-          EXTRA_FILES: "README.md LICENSE"
