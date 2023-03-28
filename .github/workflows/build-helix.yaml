@@ -42,8 +42,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            $HOME/.cargo/bin/hx
-            $HOME/.config/helix
-            $HOME/.cargo/bin/starship
+            /home/runner/.cargo/bin/hx
+            /home/runner/.cargo/bin/hx
+            /home/runner/.config/helix
+            /home/runner/.cargo/bin/starship
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
