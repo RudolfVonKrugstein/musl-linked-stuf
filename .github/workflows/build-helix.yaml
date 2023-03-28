@@ -26,7 +26,10 @@ jobs:
           toolchain: stable
           default: true
           override: true
-
+          target: x86_64-unknown-linux-musl
+          
+      - name: Install musl dependencies
+        run: apt-get install musl-dev musl-tools -y
       - name: Build
         run: cd helix && cargo build --target=x86_64-unknown-linux-musl --all --release && strip target/release/PROJECT_NAME && mv target/release/$PROJECT_NAME target/release/PROJECT_NAME_amd64
 
