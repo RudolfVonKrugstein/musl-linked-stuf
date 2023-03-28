@@ -29,7 +29,7 @@ jobs:
       - name: Build
         run: cd helix &&
              rustup target add x86_64-unknown-linux-musl &&
-             cargo install --path helix-term --target=x86_64-unknown-linux-musl --release &&
+             cargo install --path helix-term --target=x86_64-unknown-linux-musl &&
              strip $HOME/.cargo/bin/hx &&
              mkdir -p $HOME/.config/runtime &&
              cp -r ./runtime $HOME/.config/helix &&
