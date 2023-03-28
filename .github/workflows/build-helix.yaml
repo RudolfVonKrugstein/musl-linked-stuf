@@ -15,21 +15,26 @@ jobs:
           owner: 'helix-editor'
           repository: 'helix'
 
-#       - name: Install latest rust toolchain
-#         uses: actions-rs/toolchain@v1
-#         with:
-#           toolchain: stable
-#           default: true
-#           override: true
-#           target: x86_64-unknown-linux-musl
-      - name: Install rust
-        run: curl https://sh.rustup.rs -sSf | sh -s -- -y
+      - name: Install latest rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          default: true
+          override: true
+          target: x86_64-unknown-linux-musl
           
       - name: Install musl dependencies
         run: sudo apt-get install musl-dev musl-tools -y
         
       - name: Build
-        run: cd helix && rustup target add x86_64-unknown-linux-musl && cargo build --target=x86_64-unknown-linux-musl --all --release && strip target/release/PROJECT_NAME && mv target/release/$PROJECT_NAME target/release/PROJECT_NAME_amd64
+        run: cd helix &&
+             rustup target add x86_64-unknown-linux-musl &&
+             cargo install --path helix-term --target=x86_64-unknown-linux-musl --all --release &&
+             strip $HOME/.cargo/bin/hx &&
+             mkdir -p $HOME/.config/runtime &&
+             cp -r ./runtime $HOME/.config/helix &&
+             $HOME/.cargo/bin/hx --grammar fetch &&
+             $HOME/.cargo/bin/hx --gramar build
 
       - name: Release
         uses: softprops/action-gh-release@v1
