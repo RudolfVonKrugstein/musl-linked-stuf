@@ -5,6 +5,7 @@ on:
     branches: [ '*' ]
 jobs:
   release:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -43,8 +44,7 @@ jobs:
         with:
           files: |
             /home/runner/.cargo/bin/hx
-            /home/runner/.cargo/bin/hx
-            /home/runner/.config/helix
+            /home/runner/.config/helix/*
             /home/runner/.cargo/bin/starship
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
