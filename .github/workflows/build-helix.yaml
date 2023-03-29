@@ -9,48 +9,61 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Clone helix repo
-        uses: GuillaumeFalourd/clone-github-repo-action@v2
+      
+      - name: Set up Alpine linux
+        id: alpine-target
+        uses: jirutka/setup-alpine@v1
         with:
-          owner: 'helix-editor'
-          repository: 'helix'
+          arch: x86_64
+          packages:
+            build-base
+            pkg-config
+            lld
+            git
+            rustup
+            zip
+          shell-name: alpine.sh
+          volumes: /home:/mnt/alpine
 
-      - name: Install latest rust toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          default: true
-          override: true
-          target: x86_64-unknown-linux-musl
-          
-      - name: Install musl and other dependencies
-        run: sudo apt-get install musl-dev musl-tools zip -y
+      - name: Install Rust stable toolchain via rustup
+        run: rustup-init --target x86_64-unknown-linux-musl --default-toolchain stable --profile minimal -y
+        shell: alpine.sh {0}
         
+      - name: Clone helix repo
+        run: git clone https://github.com/helix-editor/helix.git
+        shell: alpine.sh {0}
+          
       - name: Build helix
-        run: cd helix &&
-             rustup target add x86_64-unknown-linux-musl &&
-             cargo install --path helix-term --target=x86_64-unknown-linux-musl &&
-             strip $HOME/.cargo/bin/hx &&
-             mkdir -p $HOME/.config/runtime &&
-             cp --verbose -r ./runtime $HOME/.config/helix &&
-             $HOME/.cargo/bin/hx --grammar fetch &&
-             $HOME/.cargo/bin/hx --grammar build &&
-             zip -r $HOME/runtime.zip $HOME/.config/helix/runtime
+        run: |
+          pwd
+          cd helix
+          rustup target add x86_64-unknown-linux-musl
+          cargo install --path helix-term --target=x86_64-unknown-linux-musl
+          strip $HOME/.cargo/bin/hx
+          mkdir -p $HOME/.config/runtime
+          cp --verbose -r ./runtime $HOME/.config/helix
+          zip -r $HOME/runtime.zip $HOME/.config/helix/runtime
+        shell: alpine.sh {0}
              
       - name: Install starship
         run: cargo install starship --target=x86_64-unknown-linux-musl
-
+        shell: alpine.sh {0}
+         
       - name: Install zellij
         run: cargo install zellij --target=x86_64-unknown-linux-musl
+        shell: alpine.sh {0}
 
       - name: Install zoxide
         run: cargo install zoxide --target=x86_64-unknown-linux-musl
+        shell: alpine.sh {0}
       
       - name: Install fd-find
         run: cargo install fd-find --target=x86_64-unknown-linux-musl
+        shell: alpine.sh {0}
 
       - name: Install taplo
         run: cargo install taplo-lsp --target=x86_64-unknown-linux-musl
+        shell: alpine.sh {0}
 
       - name: Release
         uses: softprops/action-gh-release@v1
