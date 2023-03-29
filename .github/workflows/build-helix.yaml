@@ -41,13 +41,13 @@ jobs:
         run: cargo install starship --target=x86_64-unknown-linux-musl
 
       - name: Install zellij
-        run: cargo install zellij --target=x86_64-unkown-linux-musl
+        run: cargo install zellij --target=x86_64-unknown-linux-musl
 
       - name: Install zoxide
-        run: cargo install zoxide --target=x86_64-unkown-linux-musl
+        run: cargo install zoxide --target=x86_64-unknown-linux-musl
       
       - name: Install fd-find
-        run: cargo install fd-find --target=x86_64-unkown-linux-musl
+        run: cargo install fd-find --target=x86_64-unknown-linux-musl
 
       - name: Release
         uses: softprops/action-gh-release@v1
