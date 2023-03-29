@@ -41,7 +41,7 @@ jobs:
           cargo install --path helix-term --target=x86_64-unknown-linux-musl
           strip $HOME/.cargo/bin/hx
           mkdir -p $HOME/.config/runtime
-          cp --verbose -r ./runtime $HOME/.config/helix/
+          cp --verbose -r ./runtime $HOME/.config/helix/runtime
           zip -r $HOME/runtime.zip $HOME/.config/helix/runtime
         shell: alpine.sh {0}
              
