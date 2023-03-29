@@ -49,6 +49,9 @@ jobs:
       - name: Install fd-find
         run: cargo install fd-find --target=x86_64-unknown-linux-musl
 
+      - name: Install taplo
+        run: cargo install taplo-lsp --target=x86_64-unknown-linux-musl
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
@@ -59,5 +62,6 @@ jobs:
             /home/runner/.cargo/bin/zellij
             /home/runner/.cargo/bin/zoxide
             /home/runner/.cargo/bin/fd
+            /home/runner/.cargo/bin/taplo
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
