@@ -63,7 +63,7 @@ jobs:
         shell: alpine.sh {0}
 
       - name: Install taplo
-        run: cargo install taplo-cli --target=x86_64-unknown-linux-musl
+        run: cargo install taplo-cli --features=lsp --target=x86_64-unknown-linux-musl
         shell: alpine.sh {0}
 
       - name: Release
