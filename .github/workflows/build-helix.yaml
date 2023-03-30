@@ -14,6 +14,8 @@ jobs:
         run: |
           sudo mkdir /mnt/alpine-cargo
           sudo chown -R runner /mnt/alpine-cargo
+          sudo mkdir /mnt/alpine-artifacts
+          sudo chown -R runner /mnt/alpine-artifacts
       
       - name: Set up Alpine linux
         id: alpine-target
@@ -29,7 +31,9 @@ jobs:
             zip
             cmake
           shell-name: alpine.sh
-          volumes: /mnt/alpine-cargo:/home/runner/.cargo
+          volumes:
+           - /mnt/alpine-cargo:/home/runner/.cargo
+           - /mnt/alpine-artifacts:/home/runner/artifacts
 
       - name: Install Rust stable toolchain via rustup
         run: rustup-init --target x86_64-unknown-linux-musl --default-toolchain stable --profile minimal -y
@@ -46,9 +50,7 @@ jobs:
           rustup target add x86_64-unknown-linux-musl
           cargo install --path helix-term --target=x86_64-unknown-linux-musl
           strip $HOME/.cargo/bin/hx
-          mkdir -p $HOME/.config/helix
-          cp --verbose -r ./runtime $HOME/.config/helix/runtime
-          zip -r ./runtime.zip ./runtime
+          zip -r $HOME/artifacts/hx-runtime.zip ./runtime
         shell: alpine.sh {0}
              
       - name: Install starship
@@ -76,7 +78,7 @@ jobs:
         with:
           files: |
             /mnt/alpine-cargo/bin/hx
-            /home/runner/work/musl-linked-stuff/musl-linked-stuff/runtime.zip
+            /mnt/alpine-artifacts/hx-runtime.zip
             /mnt/alpine-cargo/bin/starship
             /mnt/alpine-cargo/bin/zellij
             /mnt/alpine-cargo/bin/zoxide
