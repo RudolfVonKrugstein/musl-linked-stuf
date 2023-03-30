@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Create alpine cargo directory
-        run: mkdir /mnt/alpine-cargo
+        run: sudo mkdir /mnt/alpine-cargo
       
       - name: Set up Alpine linux
         id: alpine-target
