@@ -70,12 +70,12 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            /home/runner/.cargo/bin/hx
-            /home/runner/runtime.zip
-            /home/runner/.cargo/bin/starship
-            /home/runner/.cargo/bin/zellij
-            /home/runner/.cargo/bin/zoxide
-            /home/runner/.cargo/bin/fd
-            /home/runner/.cargo/bin/taplo
+            /mnt/alpine/runner/.cargo/bin/hx
+            /mnt/alpine/runner/runtime.zip
+            /mnt/alpine/runner/.cargo/bin/starship
+            /mnt/alpine/runner/.cargo/bin/zellij
+            /mnt/alpine/runner/.cargo/bin/zoxide
+            /mnt/alpine/runner/.cargo/bin/fd
+            /mnt/alpine/runner/.cargo/bin/taplo
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
