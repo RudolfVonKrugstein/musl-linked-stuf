@@ -24,7 +24,7 @@ jobs:
             zip
             cmake
           shell-name: alpine.sh
-          volumes: /home:/mnt/alpine
+          volumes: /home/runner/.cargo:/mnt/alpine-cargo
 
       - name: Install Rust stable toolchain via rustup
         run: rustup-init --target x86_64-unknown-linux-musl --default-toolchain stable --profile minimal -y
@@ -43,7 +43,7 @@ jobs:
           strip $HOME/.cargo/bin/hx
           mkdir -p $HOME/.config/helix
           cp --verbose -r ./runtime $HOME/.config/helix/runtime
-          zip -r $HOME/runtime.zip $HOME/.config/helix/runtime
+          zip -r ./runtime.zip ./runtime
         shell: alpine.sh {0}
              
       - name: Install starship
@@ -70,12 +70,12 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            /mnt/alpine/runner/.cargo/bin/hx
-            /mnt/alpine/runner/runtime.zip
-            /mnt/alpine/runner/.cargo/bin/starship
-            /mnt/alpine/runner/.cargo/bin/zellij
-            /mnt/alpine/runner/.cargo/bin/zoxide
-            /mnt/alpine/runner/.cargo/bin/fd
-            /mnt/alpine/runner/.cargo/bin/taplo
+            /mnt/alpine-cargo/bin/hx
+            /home/runner/work/musl-linked-stuff/musl-linked-stuff/runtime.zip
+            /mnt/alpine-cargo/bin/starship
+            /mnt/alpine-cargo/bin/zellij
+            /mnt/alpine-cargo/bin/zoxide
+            /mnt/alpine-cargo/bin/fd
+            /mnt/alpine-cargo/bin/taplo
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
