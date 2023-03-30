@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+
+      - name: Create alpine cargo directory
+        run: mkdir /mnt/alpine-cargo
       
       - name: Set up Alpine linux
         id: alpine-target
