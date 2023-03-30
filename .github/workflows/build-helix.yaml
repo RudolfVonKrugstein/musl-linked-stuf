@@ -24,7 +24,7 @@ jobs:
             zip
             cmake
           shell-name: alpine.sh
-          volumes: /home/runner/.cargo:/mnt/alpine-cargo
+          volumes: /mnt/alpine-cargo:/home/runner/.cargo
 
       - name: Install Rust stable toolchain via rustup
         run: rustup-init --target x86_64-unknown-linux-musl --default-toolchain stable --profile minimal -y
