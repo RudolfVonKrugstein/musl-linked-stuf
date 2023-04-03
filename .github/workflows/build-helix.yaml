@@ -23,6 +23,21 @@ jobs:
             rustup
             zip
             cmake
+            gnupg
+            ca-certificates
+            python3
+            libressl-dev
+            freetype-dev
+            alsa-lib-dev
+            expat-dev
+            libxcb-dev
+            libbz2
+            sndio-dev
+            freeglut-dev
+            libxmu-dev
+            libxi-dev
+            fontconfig-dev
+            libxcursor-dev
           shell-name: alpine.sh
 
       - name: Install Rust stable toolchain via rustup
