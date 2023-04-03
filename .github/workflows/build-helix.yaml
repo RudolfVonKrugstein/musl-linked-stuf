@@ -42,6 +42,10 @@ jobs:
           strip $HOME/.cargo/bin/hx
           zip -r $HOME/hx-runtime.zip ./runtime
         shell: alpine.sh {0}
+
+      - name: Install neovide
+        run: cargo install --git https://github.com/neovide/neovide
+        shell: alpine.sh {0}
              
       - name: Install starship
         run: cargo install starship --target=x86_64-unknown-linux-musl
