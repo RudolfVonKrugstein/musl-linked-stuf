@@ -81,7 +81,19 @@ jobs:
       - name: Install taplo
         run: cargo install taplo-cli --features=lsp --target=x86_64-unknown-linux-musl
         shell: alpine.sh {0}
+        
+      - name: Install felix
+        run: cargo install felix --target=x86_64-unknown-linux-musl
+        shell: alpine.sh {0}
 
+      - name: Install joshuto
+        run: cargo install joshuto --target=x86_64-unknown-linux-musl
+        shell: alpine.sh {0}
+
+      - name: Install xplr
+        run: cargo install xplr --target=x86_64-unknown-linux-musl
+        shell: alpine.sh {0}
+  
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
@@ -93,5 +105,8 @@ jobs:
             ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/zoxide
             ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/fd
             ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/taplo
+            ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/fx
+            ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/joshuto
+            ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/xplr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
