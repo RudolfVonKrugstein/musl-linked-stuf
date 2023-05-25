@@ -93,7 +93,11 @@ jobs:
       - name: Install xplr
         run: cargo install xplr --target=x86_64-unknown-linux-musl
         shell: alpine.sh {0}
-  
+        
+      - name: Install gitui
+        run: cargo install gitui --target=x86_64-unknown-linux-musl
+        shell: alpine.sh {0}
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
@@ -108,5 +112,6 @@ jobs:
             ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/fx
             ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/joshuto
             ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/xplr
+            ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/gitui
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
