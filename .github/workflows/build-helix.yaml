@@ -63,40 +63,8 @@ jobs:
 #         run: cargo install --git https://github.com/neovide/neovide
 #         shell: alpine.sh {0}
              
-      - name: Install starship
-        run: cargo install starship --target=x86_64-unknown-linux-musl
-        shell: alpine.sh {0}
-         
-      - name: Install zellij
-        run: cargo install zellij --target=x86_64-unknown-linux-musl
-        shell: alpine.sh {0}
-
-      - name: Install zoxide
-        run: cargo install zoxide --target=x86_64-unknown-linux-musl
-        shell: alpine.sh {0}
-      
-      - name: Install fd-find
-        run: cargo install fd-find --target=x86_64-unknown-linux-musl
-        shell: alpine.sh {0}
-
-      - name: Install taplo
-        run: cargo install taplo-cli --features=lsp --target=x86_64-unknown-linux-musl
-        shell: alpine.sh {0}
-        
-      - name: Install felix
-        run: cargo install felix --target=x86_64-unknown-linux-musl
-        shell: alpine.sh {0}
-
-      - name: Install joshuto
-        run: cargo install joshuto --target=x86_64-unknown-linux-musl
-        shell: alpine.sh {0}
-
-      - name: Install xplr
-        run: cargo install xplr --target=x86_64-unknown-linux-musl
-        shell: alpine.sh {0}
-        
-      - name: Install gitui
-        run: cargo install gitui --target=x86_64-unknown-linux-musl
+      - name: Install rust packages
+        run: cargo install starship zellij zoxide fd-find taplo-cli felix joshuto gitui --target=x86_64-unknown-linux-musl
         shell: alpine.sh {0}
 
       - name: Release
@@ -112,7 +80,7 @@ jobs:
             ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/taplo
             ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/fx
             ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/joshuto
-            ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/xplr
             ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/gitui
+#${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/xplr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
