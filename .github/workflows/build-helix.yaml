@@ -54,6 +54,7 @@ jobs:
           pwd
           cd helix
           rustup target add x86_64-unknown-linux-musl
+          export RUSTFLAGS="-C target-feature=-crt-static"
           cargo install --path helix-term --target=x86_64-unknown-linux-musl
           strip $HOME/.cargo/bin/hx
           zip -r $HOME/hx-runtime.zip ./runtime
