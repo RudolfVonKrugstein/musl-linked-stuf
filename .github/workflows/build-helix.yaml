@@ -38,6 +38,7 @@ jobs:
             libxi-dev
             fontconfig-dev
             libxcursor-dev
+            openssl-dev
           shell-name: alpine.sh
 
       - name: Install Rust stable toolchain via rustup
