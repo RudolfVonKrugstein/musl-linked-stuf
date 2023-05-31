@@ -38,6 +38,7 @@ jobs:
             libxi-dev
             fontconfig-dev
             libxcursor-dev
+            openssl
             openssl-dev
           shell-name: alpine.sh
 
