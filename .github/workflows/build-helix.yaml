@@ -83,7 +83,7 @@ jobs:
             ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/joshuto
             ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/gitui
             ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/alacritty
-            ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/ripgrep
+            ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/rg
 #${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/xplr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
