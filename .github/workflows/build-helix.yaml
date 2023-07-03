@@ -65,7 +65,7 @@ jobs:
 #         shell: alpine.sh {0}
              
       - name: Install rust packages
-        run: cargo install ripgrep starship zellij zoxide fd-find taplo-cli felix joshuto gitui  alacritty --target=x86_64-unknown-linux-musl
+        run: cargo install ripgrep starship shellharden zellij zoxide fd-find taplo-cli felix joshuto gitui  alacritty --target=x86_64-unknown-linux-musl
         shell: alpine.sh {0}
 
       - name: Release
@@ -84,6 +84,7 @@ jobs:
             ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/gitui
             ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/alacritty
             ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/rg
+            ${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/shellharden
 #${{ steps.alpine-target.outputs.root-path }}/home/runner/.cargo/bin/xplr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
